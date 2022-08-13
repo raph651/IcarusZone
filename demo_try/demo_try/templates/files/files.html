@@ -1,0 +1,20 @@
+{% extends "files/site.html"%}
+{% block title %} All files {% endblock %}
+{% block body %}
+{% if files%}
+<ul>
+    {% for file in files %}
+    <li><a href ="/file/{{file.id}}">{{file.name}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p> You better upload some files!</p>
+{% endif %}
+<form action="{% url 'upload' %}" method = "POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}        
+    <br />
+    <button>Upload</button>
+</form>
+{% endblock %}
+

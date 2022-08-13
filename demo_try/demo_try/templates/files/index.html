@@ -1,0 +1,7 @@
+{% extends "files/site.html"%}
+{% block title %} This index help you walk through {% endblock %}
+{% block body %} 
+{% for file in files%}
+    <li><a href='/files/'>{{file.mess}}</a></li>
+{% endfor %}
+{% endblock %}--

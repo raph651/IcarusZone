@@ -1,0 +1,25 @@
+{% extends "files/site.html"%}
+{% block title %} File details {% endblock %}
+
+{% block body %}
+<h1>Here is the file detail:</h1>
+    <form action ="{% url 'edit' file.id %}" method = "POST">
+        {% csrf_token %}
+        <label for="name">File name: </label>
+        <input type="text" name="name" id="name" placeholder="{{file.name}}"/>
+        <label for="type">File type:</label>
+        <input type="text" name="type" id="type" placeholder="{{file.file_type}}"/>
+        <p>Uploaded: {{file.upload_timestamp}}</p>
+        <button>Update</button>
+    </form>
+    <form action="{% url 'delete' file.id %}"><button>Delete</button></form>
+
+{% if file.file_type == 'jpeg' or file.file_type == 'png' or file.file_type == 'jpg' %}
+    <img src={{file.file.url}}/>
+{% endif %}
+<a href={{file.file.url}}>Check the file</a>
+<a href={{file.file.url}} download>Download</a>
+
+<p> If you want to go back to files menu, <a href ="{% url 'files' %}">click here</a></p> 
+
+{% endblock %}
