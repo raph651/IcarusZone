@@ -6,12 +6,6 @@ from .forms import UploadForm
 def home(request):
     return HttpResponse("Hello there")
 
-#data = [
-#    {'id':0,'name': 'image1.jpeg', 'type': 'jpeg'},
-#    {'id':1,'name': 'notes.txt', 'type': 'txt'},
-#    {'id':2,'name': 'image2.jpeg', 'type': 'jpeg'}
-#]   
-
 def files(request):
     data = File.objects.all()
     return render(request, 'files/files.html', {'files': data, 'form':UploadForm})

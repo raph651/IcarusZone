@@ -75,10 +75,25 @@ WSGI_APPLICATION = 'demo_try.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
+## changed from SQLite3 to PostgreSQL
+# defined the DB_NAME, DB_HOST.. to be matching the
+#  info on AWS elasticbeanstalks DB instance variables
+
+DB_NAME = 'PostgreDB'
+DB_USERNAME = 'postgres'
+DB_PASSWORD = 'Raph.651'
+DB_HOSTNAME = 'database-1.cdcdsh0folqy.us-west-2.rds.amazonaws.com'
+PORT_NUMBER = 5432
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DB_NAME,
+        'USER': DB_USERNAME,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOSTNAME,
+        'PORT': PORT_NUMBER,
     }
 }
 
