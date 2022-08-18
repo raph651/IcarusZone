@@ -62,3 +62,10 @@ container_commands:
 option_settings:
   aws:elasticbeanstalk:application:environment:
     DJANGO_SETTINGS_MODULE: APPNAME.settings
+
+## 5. upload file size exceed maximum, need to config nginx on platform site
+
+# add file to .platform/nginx/conf.d/proxy.conf
+#with this line
+
+client_max_body_size 50M;
