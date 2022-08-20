@@ -14,11 +14,11 @@
     </form>
     <form action="{% url 'delete' file.id %}"><button>Delete</button></form>
 
-{% if file.file_type == 'jpeg' or file.file_type == 'png' or file.file_type == 'jpg' %}
+{% if file.file_type == 'jpeg' or file.file_type == 'png' or file.file_type == 'jpg' or file.file_type == '.jpeg'  or file.file_type == '.png' or file.file_type == '.jpg' %}
     <img src={{file.file.url}}/>
 {% endif %}
 <a href={{file.file.url}}>Check the file</a>
-<a href={{file.file.url}} download>Download</a>
+<a href={{file.file.url}} download="{{file.name}}">Download</a>
 
 <p> If you want to go back to files menu, <a href ="{% url 'files' %}">click here</a></p> 
 
