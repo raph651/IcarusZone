@@ -47,6 +47,7 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1','backenddemo-env.eba-wiax5w4g.us-west-2
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'demo_try',
     'django.contrib.admin',
     'django.contrib.auth',
