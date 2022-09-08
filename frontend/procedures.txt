@@ -1,0 +1,28 @@
+## 1: nvm start takes long time to compile and run
+
+Each 'nvm start' command run takes about 2mins, and there is warning:
+
+---
+(node:22848) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:22848) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+---
+
+# still no obvious solution. Might be WSL2 running on windows path, slowing down the performance.
+
+
+## 2: nvm server doesn't reload after saving changes
+
+Changing content in the App.js doesn't immediately make the server reload the page
+
+#solution :
+
+@package.json:
+
+from 
+  "scripts": {
+    "start": "react-scripts start",
+
+to
+  "scripts": {
+    "start": "WATCHPACK_POLLING=true react-scripts start",
