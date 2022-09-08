@@ -12,6 +12,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from .models import File
 from .serializers import FileSerializer
+from django.conf import settings
 
 def home(request):
     return HttpResponse("Hello there")
@@ -22,12 +23,15 @@ def home(request):
 @permission_classes([IsAuthenticated])
 def files(request,format=None):
     if request.method=='GET':
-        data = File.objects.all()
+        #data = File.objects.all()
+        data = request.user.file_set.all()
         serializer = FileSerializer(data,many=True)
         return Response({'files':serializer.data})
     elif request.method=='POST':
         serializer = FileSerializer(data=request.data)
         if serializer.is_valid():
+            settings.AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', 
+						'ContentDisposition': 'attachment; filename="' + request.FILES['file'].name + '"'}
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -36,7 +40,8 @@ def files(request,format=None):
 @permission_classes([IsAuthenticated])
 def file(request, file_id,format=None):
     try:
-        data=File.objects.get(pk=file_id)
+        #data=File.objects.get(pk=file_id)
+        data = request.user.file_set.get(pk=file_id)
     except File.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':

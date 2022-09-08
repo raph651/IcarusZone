@@ -69,3 +69,16 @@ option_settings:
 #with this line
 
 client_max_body_size 50M;
+
+## 6. Postman problems: 
+
+* A. Postman doesn't conect to local server
+* B. Postman can't read files
+* C. Inputs can't be plain/text
+* D. Authentication: bearer token
+
+A:  simply download PostMan Agent on windows
+B:  change the folder name, "C://USERS/<USERNAME>/Postman Agent" to "C://USERS/<USERNAME>/Postman"
+C:  dropdown menu change to JSON
+D:  bearer token acquired through api/token/, use the api access token to authenticate, use the refresh token to generate new
+
