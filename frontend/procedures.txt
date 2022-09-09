@@ -1,6 +1,6 @@
-## 1: nvm start takes long time to compile and run
+## 1: npm start takes long time to compile and run
 
-Each 'nvm start' command run takes about 2mins, and there is warning:
+Each 'npm start' command run takes about 2mins, and there is warning:
 
 ---
 (node:22848) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
@@ -11,7 +11,7 @@ Each 'nvm start' command run takes about 2mins, and there is warning:
 # still no obvious solution. Might be WSL2 running on windows path, slowing down the performance.
 
 
-## 2: nvm server doesn't reload after saving changes
+## 2: npm server doesn't reload after saving changes
 
 Changing content in the App.js doesn't immediately make the server reload the page
 
