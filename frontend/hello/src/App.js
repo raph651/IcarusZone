@@ -2,6 +2,7 @@ import "./index.css";
 import Employee from "./components/Employee";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import AddEmployee from "./components/AddEmployee";
 
 function App() {
   const [employees, setEmployees] = useState([
@@ -36,6 +37,19 @@ function App() {
     setEmployees(updatedEmployee);
   }
 
+
+  function addEmployee(name,role,img){
+    const newEmployee={
+      id: uuidv4(),
+      name:name,
+      role:role,
+      img:img,
+    }
+      
+    setEmployees([...employees,newEmployee])
+
+  }
+
   const showEmployee = true;
   return (
     <div className="App">
@@ -43,7 +57,7 @@ function App() {
         <>
           <div className="absolute top-20 left-20">
             <strong classname="bg-red-200">People</strong>
-            <div className="relative right-50 flex flex-col flex-wrap">
+            <div className="relative right-50 flex flex-wrap">
               {employees.map((employee) => {
                 return (
                   <Employee
@@ -57,6 +71,7 @@ function App() {
                 );
               })}
             </div>
+            <AddEmployee addEmployee={addEmployee}/>
           </div>
         </>
       ) : (
