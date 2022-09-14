@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Employee from "./Employee";
 
 function EditEmployee(props) {
   const [name, setName] = useState(props.name);

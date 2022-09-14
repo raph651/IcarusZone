@@ -26,3 +26,59 @@ from
 to
   "scripts": {
     "start": "WATCHPACK_POLLING=true react-scripts start",
+
+## 3. concatenate className with variable doesn't work
+
+Example: className = "text"+ item.color, "navitem".
+        where item.color = "purple-200"
+
+# solution: className = {classNames("text"+item.color, "navitem")}
+
+or className = item.color, "navitem".
+        where item.color = "text-purple-200"
+
+## 4. Navigation active page link doesn't work with aria-current='page'
+
+Problem: wanted to create an flex box under the active navigation item, 
+for example, navbar:    main Page, employees, Team, Projects 
+                                  [-------]
+active nav is emplyees.
+
+However, in order to use aria-current, need to use useState() variable and function to update/set aria-current.
+
+Solution: use <NavLink>, such that using the 'className = { ({isActive}) => {}}' to create dynamic page update function.
+```
+                        className={({ isActive }) => {
+                          const active = isActive;
+
+                          return classNames(
+                            active ? "class1" : "class2",
+                            "classContinue..."
+                          );
+                        }}
+```
+
+
+## 5. ---:after{}--- styling. 
+
+define new element showing up besides the original element
+For example, 
+nav{
+    display: flex space-x-4;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.navitem:after {
+    content: "";
+    position: absolute;
+    background-color: #7dd3fc;
+    height: 3px;
+    width: 0;
+    left:10px;
+    bottom: 0px;
+    transition: 0.3s;
+}
+
+'.navitem:after' will create a new flex box, with specification of '.navitem' and '.navitem:after' class

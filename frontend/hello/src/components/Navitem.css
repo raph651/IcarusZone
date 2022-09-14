@@ -1,0 +1,41 @@
+/* .navitem{
+    --navcolor: #7dd3fc;
+}
+.navitem[aria-current="page"]{
+    color:  var(--navcolor)
+} */
+
+nav{
+    display: flex space-x-4;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+.navitem{
+    position: relative;
+}
+
+.navitem[aria-current="page"]:after{
+    content: "";
+    position: absolute;
+    background-color: #7dd3fc;
+    height: 3px;
+    width: 78%;
+    left: 10px;
+    bottom: 0px;
+}
+
+.navitem:after {
+    content: "";
+    position: absolute;
+    background-color: #7dd3fc;
+    height: 3px;
+    width: 0;
+    left:10px;
+    bottom: 0px;
+    transition: 0.3s;
+}
+
+.navitem:hover:after{
+    width: 78%;
+}
