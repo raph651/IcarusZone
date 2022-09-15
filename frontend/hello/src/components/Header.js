@@ -6,20 +6,40 @@ import "./Navitem.css";
 import { NavLink } from "react-router-dom";
 
 const navigation = [
-  { name: "Main Page", href: "/", current: false, color: "text-red-300" },
+  {
+    name: "Main Page",
+    href: "/",
+    current: false,
+    color: "text-red-300",
+    /* hcolor: "hover:text-red-300", */
+  },
   {
     name: "Employees",
     href: "/employees",
     current: false,
     color: "text-lime-300",
+    /* hcolor: "hover:text-lime-300", */
   },
-  { name: "Team", href: "//", current: false, color: "text-purple-300" },
-  { name: "Projects", href: "//", current: false, color: "text-gray-50" },
+  {
+    name: "Dictionary",
+    href: "/dictionary",
+    current: false,
+    color: "text-purple-300",
+    /* hcolor: "hover:text-purple-300",*/
+  },
+  {
+    name: "Projects",
+    href: "//",
+    current: false,
+    color: "text-gray-50",
+    /* hcolor: "hover:text-gray-50", */
+  },
   {
     name: "Calendar",
     href: "//",
     current: false,
     color: "text-orange-300",
+    /* hcolor: "hover:text-orange-300", */
   },
 ];
 
@@ -30,69 +50,59 @@ function classNames(...classes) {
 export default function Header(props) {
   return (
     <>
-    <Disclosure as="nav" className="bg-gray-600">
-      {({ open }) => (
-        <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="hidden sm:ml-6 sm:block">
-                  <nav>
-                    {navigation.map((item) => (
-                      <NavLink
-                        key={item.name}
-                        to={item.href}
-                        className={({ isActive }) => {
-                          const active = item.current || isActive;
-                          /* console.log(
-                            item.href + " " + isActive,
-                            "active is ",
-                            active
-                          ); */
-                          return classNames(
-                            "navitem",
-                            active
-                              ? item.color
-                              : "text-sky-300",
-                            "hover:" + item.color,
-                            "no-underline px-3 py-2 rounded-md text-sm font-medium"
-                          );
-                        }}
-                        aria-current="page"
-/*                         className={classNames(
-                          "navitem",
-                          "hover:" + item.color,
-                          "no-underline px-3 py-2 rounded-md text-sm font-medium"
-                        )} */
-                      >
-                        {item.name}
-                      </NavLink>
-                    ))}
-                  </nav>
+      <Disclosure as="nav" className="bg-gray-600">
+        {({ open }) => (
+          <>
+            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+              <div className="relative flex h-16 items-center justify-between">
+                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                  {/* Mobile menu button*/}
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <span className="sr-only">Open main menu</span>
+                    {open ? (
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                    )}
+                  </Disclosure.Button>
                 </div>
-              </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-600 p-1 text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                  <div className="hidden sm:ml-6 sm:block">
+                    <nav>
+                      {navigation.map((item) => (
+                        <NavLink
+                          key={item.name}
+                          to={item.href}
+                          className={({ isActive }) => {
+                            const active = item.current || isActive;
+                            return classNames(
+                              "navitem",
+                              active ? item.color : "text-sky-300",
+                              "hover:" +
+                                (item.color ? item.color : "text-red-300"),
+                              /* item.hcolor, */
+                              "no-underline px-3 py-2 rounded-md text-sm font-medium"
+                            );
+                          }}
+                          aria-current="page"
+                        >
+                          {item.name}
+                        </NavLink>
+                      ))}
+                    </nav>
+                  </div>
+                </div>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <button
+                    type="button"
+                    className="rounded-full bg-gray-600 p-1 text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  >
+                    <span className="sr-only">View notifications</span>
+                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
 
-                {/* Profile dropdown */}
-                {/* <Menu as="div" className="relative ml-3">
+                  {/* Profile dropdown */}
+                  {/* <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
@@ -150,38 +160,37 @@ export default function Header(props) {
                     </Menu.Items>
                   </Transition>
                 </Menu> */}
+                </div>
               </div>
             </div>
-          </div>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <NavLink
+            <Disclosure.Panel className="sm:hidden">
+              <div className="space-y-1 px-2 pt-2 pb-3">
+                {navigation.map((item) => (
+                  <NavLink
                     key={item.name}
                     to={item.href}
                     className={({ isActive }) => {
-                    const active = item.current || isActive;
-                    return classNames(
+                      const active = item.current || isActive;
+                      return classNames(
                         "navitem",
-                        active
-                        ? item.color
-                        : "text-sky-300",
-                        "hover:" + item.color,
+                        active ? item.color : "text-sky-300",
+                        "hover:" + (item.color ? item.color : "text-red-300"),
+                        /* item.hcolor, */
                         "no-underline px-3 py-2 block w-fit rounded-md text-base font-medium"
-                    );
+                      );
                     }}
                     aria-current="page"
-                >
+                  >
                     {item.name}
-                </NavLink>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
-    {props.children}
+                  </NavLink>
+                ))}
+              </div>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
+      {props.children}
     </>
   );
 }
