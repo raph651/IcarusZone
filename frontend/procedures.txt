@@ -82,3 +82,14 @@ nav{
 }
 
 '.navitem:after' will create a new flex box, with specification of '.navitem' and '.navitem:after' class
+
+## 6. 'POST' error message=>: 'http://localhost:8000/api/customer/24/ 500 (Internal Server Error)'
+and 'SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON'
+
+Problem : tried to editCustomer and then fetch to backend using 'POST' method. The 'Content-Type' in headers 
+is already set to be 'application/json', still not working.
+
+Reason: the 500 error comes from views.customer doesn't have the permission for 'POST'
+
+Solution: add 'POST' method to views.customer function
+

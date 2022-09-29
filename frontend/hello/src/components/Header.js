@@ -28,8 +28,8 @@ const navigation = [
     /* hcolor: "hover:text-purple-300",*/
   },
   {
-    name: "Projects",
-    href: "//",
+    name: "Customers",
+    href: "/customers",
     current: false,
     color: "text-gray-50",
     /* hcolor: "hover:text-gray-50", */

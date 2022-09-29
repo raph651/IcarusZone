@@ -46,9 +46,7 @@ function Employees() {
       role:role,
       img:img,
     }
-      
     setEmployees([...employees,newEmployee])
-
   }
 
   const showEmployee = true;

@@ -34,7 +34,7 @@ export default function Definition() {
       .catch((e) => {
         console.log(e.message);
       });
-  });
+  },[]);
   if (notFound || error === true) {
     navigate("/definition/notfound");
   }

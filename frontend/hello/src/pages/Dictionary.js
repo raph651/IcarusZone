@@ -5,12 +5,14 @@ export default function Dictionary() {
   const navigate = useNavigate();
 
   return (
+
     <form
       onSubmit={() => {
         navigate("/definition/" + word);
       }}
       className="text-center pt-10 space-x-8 space-y-5"
     >
+      <h2>Please enter the word you want to look up</h2>
       <input
         className="text-white h-6.5 bg-indigo-500 border-2 hover:border-green-400 focus:border-red-400 border-solid focus:border-transparent"
         type="text"
