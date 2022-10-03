@@ -1,8 +1,8 @@
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { baseURL } from "../shared";
-
+import { loginContext } from "../App";
 const container = {
   center: true,
 };
@@ -13,17 +13,25 @@ export default function Customer() {
   const [tempCustomer, setTempCustomer] = useState();
   const [changed, setChanged] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const [error, setError] = useState();
   const [notFound, setNotFound] = useState(false);
   const url = baseURL + "api/customer/" + search + "/";
+  const [loggedIn, setloggedIn] = useContext(loginContext);
   useEffect(() => {
-    fetch(url)
+    fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access"),
+      },
+    })
       .then((response) => {
         console.log(response.status);
         if (response.status === 404) {
           setNotFound(true);
         } else if (response.status === 401) {
-          navigate("/login");
+          setloggedIn(false);
+          navigate("/login", { state: { previousURL: location.pathname } });
         } else if (response.status === 500) {
           setError(true);
         }
@@ -44,11 +52,17 @@ export default function Customer() {
     console.log("updating customer");
     fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(tempCustomer),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access"),
+        body: JSON.stringify(tempCustomer),
+      },
     })
       .then((response) => {
-        if (!response.ok) {
+        if (response.status === 401) {
+          setloggedIn(false);
+          navigate("/login", { state: { previousURL: location.pathname } });
+        } else if (!response.ok) {
           throw new Error("something went wrong");
         }
         return response.json();
@@ -69,10 +83,16 @@ export default function Customer() {
     console.log("deleting customer");
     fetch(url, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access"),
+      },
     })
       .then((response) => {
-        if (!response.ok) {
+        if (response.status === 401) {
+          setloggedIn(false);
+          navigate("/login", { state: { previousURL: location.pathname } });
+        } else if (!response.ok) {
           throw new Error("Something went wrong");
         }
         navigate("/customers/");
@@ -171,7 +191,7 @@ export default function Customer() {
                 Delete
               </button>
             </div>
-            <div className='md:w-1/5'>
+            <div className="md:w-1/5">
               <Link to="/customers/">
                 <button className="no-underline bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
                   ← Go Back

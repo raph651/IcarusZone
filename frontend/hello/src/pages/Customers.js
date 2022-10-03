@@ -1,31 +1,40 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddCustomer from "../components/AddCustomer";
 import { baseURL } from "../shared";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
+import { loginContext } from "../App";
 
 const url = baseURL + "api/customers/";
 
 export default function Customers(props) {
+  const [loggedIn,setloggedIn]=useContext(loginContext);
   const [customers, setCustomers] = useState();
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
   function toggleShow() {
     setShow(!show);
   }
 
   useEffect(() => {
-    fetch(url)
+    fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access"),
+      },
+    })
       .then((response) => {
-        if (response.status ===401){
-          console.log('401 login needed')
-          navigate('/login')
-        }
-        else if (!response.ok) {
+        if (response.status === 401) {
+          console.log("401 login needed");
+          setloggedIn(false)
+          navigate("/login", { state: { previousURL: location.pathname } });
+        } else if (!response.ok) {
           throw new Error("something went wrong");
         }
         /*         console.log(response.status);
-         */ 
+         */
         return response.json();
       })
       .then((data) => {
@@ -53,7 +62,7 @@ export default function Customers(props) {
       })
       .then((data) => {
         toggleShow();
-        setCustomers([...customers,data.customer])
+        setCustomers([...customers, data.customer]);
         //assume the add was successful
         //hide the modal
         //make sure the list is updated appropriately
@@ -72,7 +81,7 @@ export default function Customers(props) {
             return (
               <>
                 <p key={c.id}>
-                  <a href={"/customer/" + c.id+'/'}>{c.name}</a>
+                  <a href={"/customer/" + c.id + "/"}>{c.name}</a>
                   {" working for company " + c.industry}
                 </p>
               </>

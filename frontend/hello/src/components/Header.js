@@ -1,10 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from "react";
+import { useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import "./Navitem.css";
 import { NavLink } from "react-router-dom";
-
+import { loginContext } from "../App";
 const navigation = [
   {
     name: "Main Page",
@@ -34,13 +34,6 @@ const navigation = [
     color: "text-gray-50",
     /* hcolor: "hover:text-gray-50", */
   },
-  {
-    name: "Calendar",
-    href: "//",
-    current: false,
-    color: "text-orange-300",
-    /* hcolor: "hover:text-orange-300", */
-  },
 ];
 
 function classNames(...classes) {
@@ -48,6 +41,11 @@ function classNames(...classes) {
 }
 
 export default function Header(props) {
+  const [loggedIn, setloggedIn] = useContext(loginContext);
+  const logout = () => {
+    setloggedIn(false);
+    localStorage.clear();
+  };
   return (
     <>
       <Disclosure as="nav" className="bg-gray-600">
@@ -89,6 +87,42 @@ export default function Header(props) {
                           {item.name}
                         </NavLink>
                       ))}
+                      {loggedIn ? (
+                        <NavLink
+                          key={"loggedin"}
+                          to={"/logout"}
+                          onClick={logout}
+                          className={({ isActive }) => {
+                            const active = isActive;
+                            return classNames(
+                              "navitem",
+                              active ? "text-orange-300" : "text-sky-300",
+                              "hover:text-orange-300",
+                              "no-underline px-3 py-2 rounded-md text-sm font-medium"
+                            );
+                          }}
+                          aria-current="page"
+                        >
+                          Log Out
+                        </NavLink>
+                      ) : (
+                        <NavLink
+                          key={"userloggout"}
+                          to={"/login"}
+                          className={({ isActive }) => {
+                            const active = isActive;
+                            return classNames(
+                              "navitem",
+                              active ? "text-orange-300" : "text-sky-300",
+                              "hover:text-orange-300",
+                              "no-underline px-3 py-2 rounded-md text-sm font-medium"
+                            );
+                          }}
+                          aria-current="page"
+                        >
+                          Log In
+                        </NavLink>
+                      )}
                     </nav>
                   </div>
                 </div>
@@ -185,6 +219,43 @@ export default function Header(props) {
                     {item.name}
                   </NavLink>
                 ))}
+
+                {loggedIn ? (
+                  <NavLink
+                    key={"loggedin"}
+                    to={"/logout"}
+                    onClick={logout}
+                    className={({ isActive }) => {
+                      const active = isActive;
+                      return classNames(
+                        "navitem",
+                        active ? "text-orange-300" : "text-sky-300",
+                        "hover:text-orange-300",
+                        "no-underline px-3 py-2 block w-fit rounded-md text-base font-medium"
+                      );
+                    }}
+                    aria-current="page"
+                  >
+                    Log Out
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    key={"userloggout"}
+                    to={"/login"}
+                    className={({ isActive }) => {
+                      const active = isActive;
+                      return classNames(
+                        "navitem",
+                        active ? "text-orange-300" : "text-sky-300",
+                        "hover:text-orange-300",
+                        "no-underline px-3 py-2 block w-fit rounded-md text-base font-medium"
+                      );
+                    }}
+                    aria-current="page"
+                  >
+                    Log In
+                  </NavLink>
+                )}
               </div>
             </Disclosure.Panel>
           </>
