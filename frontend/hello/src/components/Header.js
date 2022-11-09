@@ -34,6 +34,12 @@ const navigation = [
     color: "text-gray-50",
     /* hcolor: "hover:text-gray-50", */
   },
+  {
+    name: "Register",
+    href: "/register",
+    current: false,
+    color: "text-teal-200",
+  },
 ];
 
 function classNames(...classes) {
@@ -76,9 +82,9 @@ export default function Header(props) {
                             return classNames(
                               "navitem",
                               active ? item.color : "text-sky-300",
-                              "hover:" +
+                              "hover:" + //item.color,
                                 (item.color ? item.color : "text-red-300"),
-                              /* item.hcolor, */
+                              // item.hcolor,
                               "no-underline px-3 py-2 rounded-md text-sm font-medium"
                             );
                           }}

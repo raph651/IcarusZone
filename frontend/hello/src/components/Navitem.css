@@ -33,7 +33,7 @@ nav{
     width: 0;
     left:10px;
     bottom: 0px;
-    transition: 0.3s;
+    transition: 0.4s;
 }
 
 .navitem:hover:after{
