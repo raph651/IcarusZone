@@ -27,7 +27,7 @@ def home(request):
 @permission_classes([IsAuthenticated])
 def files(request, format=None):
     if request.method == "GET":
-        data = File.objects.all()
+        data = request.user.file_set.all()
         # data = request.user.file_set.all()
         serializer = FileSerializer(data, many=True)
         return Response({"files": serializer.data})
@@ -46,10 +46,10 @@ def files(request, format=None):
 
 
 @api_view(["GET", "PATCH", "DELETE"])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def file(request, file_id, format=None):
     try:
-        data = File.objects.get(pk=file_id)
+        data = request.user.file_set.get(pk=file_id)
         # data = request.user.file_set.get(pk=file_id)
     except File.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)

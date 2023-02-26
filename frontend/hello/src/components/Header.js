@@ -14,21 +14,21 @@ const navigation = [
     /* hcolor: "hover:text-red-300", */
   },
   {
-    name: "Employees",
+    name: "Medical History",
     href: "/employees",
     current: false,
     color: "text-lime-300",
     /* hcolor: "hover:text-lime-300", */
   },
   {
-    name: "Dictionary",
+    name: "Appointment",
     href: "/dictionary",
     current: false,
     color: "text-purple-300",
     /* hcolor: "hover:text-purple-300",*/
   },
   {
-    name: "Customers",
+    name: "Messages",
     href: "/customers",
     current: false,
     color: "text-gray-50",
@@ -38,7 +38,7 @@ const navigation = [
     name: "Register",
     href: "/register",
     current: false,
-    color: "text-teal-200",
+    color: "text-teal-400",
   },
 ];
 

@@ -93,3 +93,37 @@ Reason: the 500 error comes from views.customer doesn't have the permission for 
 
 Solution: add 'POST' method to views.customer function
 
+## 6. App.js can't resolve the function from components.
+
+--> Problem: 
+  Defined a function start with lowercase letter (like newPage) in scr/pages/newPage.js
+
+  Specifically, newPage.js looks like
+```
+    export default function newPage(){
+      return ....;
+    }
+```
+  In App.js,
+```
+    import newPage from "./pages/newPage";
+
+    ...
+
+    <Route path=... element = {<newPage/>} />
+
+    ...
+
+```
+
+However, the newPage function can't be resolved and it was not used in App.js.
+
+--> Reason: All React component names must start with a capital letter. If you start a component name with 
+a lowercase letter, it will be treated as a built-in element like a <div> or a <span>. This is because of the way JSX works.
+
+--> Solve: replace the function name starting with upppercase letter ( newPage -> NewPage )
+
+## 7. Add react component into Django site 
+See https://reactjs.org/docs/add-react-to-a-website.html#quickly-try-jsx
+
+https://medium.com/uva-mobile-devhub/set-up-react-in-your-django-project-with-webpack-4fe1f8455396
