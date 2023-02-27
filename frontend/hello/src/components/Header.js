@@ -38,7 +38,7 @@ const navigation = [
     name: "Register",
     href: "/register",
     current: false,
-    color: "text-teal-400",
+    color: "text-red-300",
   },
 ];
 
@@ -82,10 +82,9 @@ export default function Header(props) {
                             return classNames(
                               "navitem",
                               active ? item.color : "text-sky-300",
-                              "hover:" + //item.color,
-                                (item.color ? item.color : "text-red-300"),
-                              // item.hcolor,
-                              "no-underline px-3 py-2 rounded-md text-sm font-medium"
+                              "hover:" +
+                                (item.color ? item.color : "text-red-300") +
+                                " no-underline px-3 py-2 rounded-md text-sm font-medium"
                             );
                           }}
                           aria-current="page"

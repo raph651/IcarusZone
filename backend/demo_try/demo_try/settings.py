@@ -74,7 +74,7 @@ SIMPLE_JWT = {
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','backenddemo-env.eba-wiax5w4g.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','Demotry-env-1.eba-sv493e7v.us-west-2.elasticbeanstalk.com','api.icaruszone.com']
 
 
 # Application definition
@@ -104,8 +104,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-]
+    'http://localhost:3000','https://site.icaruszone.com','http://site.icaruszone.com','https://d29pkiqpdpyg9r.cloudfront.net','http://site.icaruszone.com.s3-website-us-west-2.amazonaws.com'
+'site.icaruszone.com','http://site.icaruszone.com.s3-website-us-west-2.amazonaws.com']
 
 ROOT_URLCONF = 'demo_try.urls'
 

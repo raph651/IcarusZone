@@ -82,3 +82,19 @@ B:  change the folder name, "C://USERS/<USERNAME>/Postman Agent" to "C://USERS/<
 C:  dropdown menu change to JSON
 D:  bearer token acquired through api/token/, use the api access token to authenticate, use the refresh token to generate new
 
+## 7. Deploy the Django application to Elastic Beanstalk. See this for more info https://testdriven.io/blog/django-elastic-beanstalk. 
+
+
+## 8. After adding the AWS CloudFront, need to add this cloudfront address and S3 bucket address to CORS_ALLOWED_ORIGINS!
+
+Again, when fetch apis from the frontend website. It shows error that the request method should be made over HTTPS. 
+
+To solve, configure the elasticbeanstalk environment's Load Balancer. Add a listener with port 443 over HTTPS. Need to also add a SSL certificate. Important thing to note is that, the default elasticbeanstalk environment address which is quite long, is not eligible for a SSL certificate. To circumvent that, use something like `api.icaruszone.com` as the fully qualified domain name. Then add this FQDN as CNAME in your DNS provider. Then add the SSL certificate CNAME too.
+
+The Django settings should have `api.icaruszone.com` in allowed host. Also modify the Frontend Fectch url to this `https://api.icaruszone.com/`.
+
+
+## 9. After eb ssh, cannot find environment variables.
+
+--> run
+ ```export $(sudo cat /opt/elasticbeanstalk/deployment/env | xargs) ```

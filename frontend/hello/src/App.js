@@ -11,6 +11,7 @@ import Customer from "./pages/Customer";
 import CustomerNotFound from "./pages/CustomerNotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Files from "./pages/Files";
 import { baseURL } from "./shared";
 
 export const loginContext = createContext();
@@ -33,7 +34,7 @@ function App() {
             return response.json();
           })
           .then((data) => {
-            console.log(data);
+            //console.log(data);
             localStorage.access = data.access;
             localStorage.refresh = data.refresh;
             setloggedIn(true);
@@ -69,6 +70,7 @@ function App() {
             <Route path="/customer/notfound" element={<CustomerNotFound />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/files" element={<Files />} />
           </Routes>
         </Header>
       </BrowserRouter>

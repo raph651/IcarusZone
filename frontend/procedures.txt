@@ -37,6 +37,10 @@ Example: className = "text"+ item.color, "navitem".
 or className = item.color, "navitem".
         where item.color = "text-purple-200"
 
+Sometimes, the "hover:" + (item.color ? item.color : ' ') " statement doesn't work.
+Specifically, the last item would not add the hover effect. When I change to "hover:text-a_color-xxx"
+it works again. This issue is kind of related to react's state of components.
+
 ## 4. Navigation active page link doesn't work with aria-current='page'
 
 Problem: wanted to create an flex box under the active navigation item, 
@@ -127,3 +131,22 @@ a lowercase letter, it will be treated as a built-in element like a <div> or a <
 See https://reactjs.org/docs/add-react-to-a-website.html#quickly-try-jsx
 
 https://medium.com/uva-mobile-devhub/set-up-react-in-your-django-project-with-webpack-4fe1f8455396
+
+
+## 8. AWS S3 webhosting. Create a bucket called the same name as your CNAME (eg. site.icaruszone.com).
+After `npm run build`, upload the build files to the bucket. In the property, enable static website hosting. Now,
+this bucket-name.aws.s3.xxxxx.com can be accessible!
+
+## 9. Create an AWS CloudFront for the website. The browser might tell the user this website is insecure. 
+Create an AWS CloudFront, link the S3 bucket endpoint and add an additional CNAME(same name for the bucket name).
+Request a public SSL certificate, so this website will look secure. Also, configure the cloudfront to redirect http to https.
+Then both http://site.icaruszone.com or https://site.icaruszone.com could work.
+
+Now, this xxxxxx.cloudfront.net can be accessible!
+
+Go to the DNS provider and add the corresponding CNAME (site -> this cloudfront address), add the SSL certificate CNAME.
+
+PS: The CloudFront will cache S3 bucket response for default 48 hrs. So even you change files in S3 bucket, the update will not be reflected.
+You have to invalidate the file path's in CloudFront, or you can point object versioning to the changed files.
+
+Alright, the website should show no insecure message now.

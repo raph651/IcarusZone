@@ -34,6 +34,7 @@ export default function Login() {
       })
       .catch((e) => {
         console.log(e.message);
+        console.log(baseURL)
       });
   }
   return (
